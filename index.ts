@@ -1,11 +1,12 @@
-import express, {Express,Request,Response} from "express";
+import express, {Express} from "express";
 import moment from "moment";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import sequelize from "./config/database";
+import ClientRoute from "./routes/client/index.route";
+
+
 dotenv.config();
 //Conect database
-sequelize;
 
 const app:Express = express();
 const port:number|string=process.env.PORT||3000;
@@ -22,10 +23,9 @@ app.use(bodyParser.json());
 app.locals.moment=moment;
 //END APP LOCAL VARIABLE
 
-app.get("/tours",(req:Request,res:Response) =>{
-  res.render("client/pages/tours/index");
-});
-
+//Route
+ClientRoute(app);
+//End Router
 app.listen(port,()=>{
   console.log(`App listening on port ${port}`);
 });
